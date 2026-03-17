@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>西语 PDF 点读机</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Spanish PDF Reader</p>
+          <h1>西语 PDF 点读机</h1>
+          <p class="hero-copy">
+            导入西语 PDF，选中任意一句或一段，浏览器就能直接朗读。适合做听读、跟读和生词定位。
+          </p>
+        </div>
+        <div class="hero-card">
+          <label class="upload-card" for="pdf-input">
+            <span>导入 PDF</span>
+            <strong>选择本地西语 PDF 文件</strong>
+            <small>不会上传到服务器，解析和朗读都在浏览器本地完成。</small>
+          </label>
+          <input id="pdf-input" type="file" accept="application/pdf" />
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="control-panel">
+          <section class="panel-block">
+            <h2>朗读控制</h2>
+            <label>
+              <span>西语语音</span>
+              <select id="voice-select"></select>
+            </label>
+            <label>
+              <span>语速 <output id="rate-value">1.0</output></span>
+              <input id="rate-input" type="range" min="0.6" max="1.4" step="0.1" value="1.0" />
+            </label>
+            <label>
+              <span>音调 <output id="pitch-value">1.0</output></span>
+              <input id="pitch-input" type="range" min="0.8" max="1.2" step="0.1" value="1.0" />
+            </label>
+            <label class="toggle">
+              <input id="auto-read-toggle" type="checkbox" checked />
+              <span>选中后自动朗读</span>
+            </label>
+            <div class="button-row">
+              <button id="speak-button" disabled>朗读选中内容</button>
+              <button id="stop-button" class="secondary">停止</button>
+            </div>
+            <div class="button-row">
+              <button id="ocr-button" class="secondary">OCR 补强漏字页</button>
+              <button id="ocr-stop-button" class="secondary">中止 OCR</button>
+            </div>
+          </section>
+
+          <section class="panel-block">
+            <h2>当前选区</h2>
+            <p id="selection-preview" class="selection-preview muted">
+              还没有选中文本。导入 PDF 后，在右侧文本区用鼠标划词即可。
+            </p>
+          </section>
+
+          <section class="panel-block">
+            <h2>状态</h2>
+            <p id="status-text" class="status-text">等待导入 PDF。</p>
+          </section>
+        </aside>
+
+        <section class="reader-panel">
+          <div class="reader-header">
+            <div>
+              <p class="reader-label">可选中文本区</p>
+              <h2 id="document-title">尚未加载文档</h2>
+            </div>
+            <p class="reader-tip">页面会保留原始插图和版式。直接在页面上拖选句子即可朗读。</p>
+          </div>
+          <div id="reader-content" class="reader-content empty">
+            <div class="empty-state">
+              <p>先导入一个西语 PDF。</p>
+              <small>加载完成后，这里会显示原始 PDF 页面，并叠加可选中的文字层。</small>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
